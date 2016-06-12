@@ -1,0 +1,25 @@
+set number              " show line numbers
+set cursorline          " highlight current line
+filetype indent on      " load filetype-specific indent files
+set showmatch           " highlight matching [{()}]
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+set ignorecase
+set smartcase
+
+let mapleader=","  " leader is comma
+nnoremap <leader><space> :nohlsearch<CR>
+
+c>
+
+" Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+map :Q :q
+map :W :w
+map <C-c> a<C-c><ESC>
+vnoremap <C-C> :w !pbcopy<CR><CR>
+
+let mapleader=","  " leader is comma
+nnoremap <leader><space> :nohlsearch<CR>
