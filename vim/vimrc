@@ -27,12 +27,11 @@ filetype plugin indent on    " required
 
 "Ack.vim settings {{{
 cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack!<Space>
+nnoremap <Leader>f :Ack!<Space>
 "}}}
 
 " Nerdtree {{{ 
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <BS> :NERDTreeToggle<CR>
 "}}}
 
@@ -59,12 +58,18 @@ set ignorecase
 set smartcase
 set tabstop=2       " number of visual spaces per TAB
 set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2
+set autoindent
+set smartindent
+set cindent
+set smarttab
 set expandtab       " tabs are spaces
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set foldenable          " enable folding
 set foldlevelstart=10   " open most folds by default
 set foldnestmax=10      " 10 nested fold max
+set backspace=indent,eol,start
 " fold vimrc
 set foldmethod=marker
 set foldlevel=0
@@ -81,6 +86,12 @@ nnoremap <C-H> <C-W><C-H>
 " space open/closes folds
 nnoremap <space> za
 
+" edit vimrc/zshrc and load vimrc bindings
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>ez :vsp ~/.zshrc<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+"make jk == esc
 inoremap jk <esc>
 
 " Reselect visual block after indent/outdent
