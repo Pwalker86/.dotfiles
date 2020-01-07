@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
+filetype plugin on                 " required
+set omnifunc=syntaxcomplete#Complete
 
 " Plugins {{{
 " set the runtime path to include Vundle and initialize
@@ -7,6 +8,10 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
+"Plugin 'valloric/youcompleteme'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -14,12 +19,12 @@ Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-endwise'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'mattn/emmet-vim'
-Plugin 'mattn/webapi-vim'
 Plugin 'tpope/vim-rails'
 Plugin 'mileszs/ack.vim'
-Plugin 'sjl/gundo.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'scrooloose/syntastic'
+Plugin 'mbbill/undotree'
+Plugin 'pangloss/vim-javascript'
+Plugin 'yuezk/vim-js'
+Plugin 'maxmellon/vim-jsx-pretty'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -48,27 +53,20 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 "}}}
 
-" Gundo settings {{{
-nnoremap <leader>u :GundoToggle<CR>
+" undotree settings {{{
+nnoremap <Leader>u :UndotreeToggle<cr>
 "}}}
 "
-" Syntastic {{{
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" }}}
 
 " General Vim settings {{{
 syntax enable           " enable syntax processing
-set number              " show line numbers
+"set number              " show line numbers
+" turn hybrid line numbers on
+set number relativenumber
+set nu rnu
 set cursorline          " highlight current line
 filetype indent on      " load filetype-specific indent files
-set spell spelllang=en_us
+"set spell spelllang=en_us
 set showmatch           " highlight matching [{()}]
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
@@ -84,15 +82,15 @@ set smarttab
 set expandtab       " tabs are spaces
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
-set foldenable          " enable folding
-set foldlevelstart=10   " open most folds by default
-set foldnestmax=10      " 10 nested fold max
+"set foldenable          " enable folding
+"set foldlevelstart=10   " open most folds by default
+"set foldnestmax=10      " 10 nested fold max
 set backspace=indent,eol,start
 " fold vimrc
-set foldmethod=marker
-set foldlevel=0
-set modelines=1
-set foldmethod=indent   " fold based on indent level
+"set foldmethod=marker
+"set foldlevel=0
+"set modelines=1
+"set foldmethod=indent   " fold based on indent level
 colorscheme molokai
 
 let g:mapleader=","  " leader is comma
@@ -113,7 +111,7 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap j gj
 nnoremap k gk
 " space open/closes folds
-nnoremap <space> za
+"nnoremap <space> za
 
 " edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
